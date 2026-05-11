@@ -1,0 +1,25 @@
+@model Author
+@{
+    ViewData["Title"] = "Редактирай автор";
+}
+
+<div class="form-card">
+    <h1>✏️ Редактирай автор</h1>
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="AuthorId" />
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="field-error"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Bio"></label>
+            <textarea asp-for="Bio" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Запази</button>
+            <a asp-action="Index" class="btn">Отказ</a>
+        </div>
+    </form>
+</div>

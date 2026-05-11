@@ -1,0 +1,16 @@
+@model Category
+@{
+    ViewData["Title"] = "Изтрий категория";
+}
+<div class="form-card delete-card">
+    <h1>🗑️ Изтриване на категория</h1>
+    <p class="delete-msg">Сигурни ли сте, че искате да изтриете категория <strong>@Model.Name</strong>?</p>
+    <p>Тя е свързана с @Model.BookCategories.Count книги.</p>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CategoryId" />
+        <div class="form-actions">
+            <button type="submit" class="btn btn-del">Да, изтрий</button>
+            <a asp-action="Index" class="btn">Отказ</a>
+        </div>
+    </form>
+</div>

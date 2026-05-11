@@ -1,0 +1,55 @@
+@model Book
+@{
+    ViewData["Title"] = "Редактирай книга";
+    var selectedCats = ViewBag.SelectedCategories as List<int> ?? new List<int>();
+}
+
+<div class="form-card">
+    <h1>✏️ Редактирай книга</h1>
+
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="BookId" />
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="field-error"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Year"></label>
+            <input asp-for="Year" class="form-control" />
+            <span asp-validation-for="Year" class="field-error"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="AuthorId"></label>
+            <select asp-for="AuthorId" asp-items="ViewBag.Authors" class="form-control"></select>
+        </div>
+
+        <div class="form-group">
+            <label>Категории</label>
+            <div class="checkbox-group">
+                @foreach (var cat in ViewBag.Categories)
+                {
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="selectedCategories" value="@cat.CategoryId"
+                               @(selectedCats.Contains(cat.CategoryId) ? "checked" : "") />
+                        @cat.Name
+                    </label>
+                }
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Запази</button>
+            <a asp-action="Index" class="btn">Отказ</a>
+        </div>
+    </form>
+</div>

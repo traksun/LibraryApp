@@ -1,0 +1,19 @@
+@model Category
+@{
+    ViewData["Title"] = "Редактирай категория";
+}
+<div class="form-card">
+    <h1>✏️ Редактирай категория</h1>
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="CategoryId" />
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="field-error"></span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Запази</button>
+            <a asp-action="Index" class="btn">Отказ</a>
+        </div>
+    </form>
+</div>

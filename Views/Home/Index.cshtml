@@ -1,0 +1,59 @@
+@{
+    ViewData["Title"] = "Начало";
+}
+
+<section class="hero">
+    <div class="hero-text">
+        <h1>Онлайн Библиотека</h1>
+        <p>Открий, добави и управлявай книги, автори и категории</p>
+        <a asp-controller="Books" asp-action="Index" class="btn btn-primary">Разгледай книгите</a>
+    </div>
+</section>
+
+<section class="stats">
+    <div class="stat-card">
+        <div class="stat-num">@ViewBag.BookCount</div>
+        <div class="stat-label">Книги</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-num">@ViewBag.AuthorCount</div>
+        <div class="stat-label">Автори</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-num">@ViewBag.CategoryCount</div>
+        <div class="stat-label">Категории</div>
+    </div>
+</section>
+
+<section class="recent-section">
+    <h2 class="section-title">Последно добавени книги</h2>
+    <div class="book-grid">
+        @foreach (var book in ViewBag.RecentBooks)
+        {
+            <div class="book-card">
+                <div class="book-spine"></div>
+                <div class="book-info">
+                    <h3>@book.Title</h3>
+                    <p class="book-author">@book.Author?.Name</p>
+                    <p class="book-year">@book.Year</p>
+                    <a asp-controller="Books" asp-action="Details" asp-route-id="@book.BookId" class="btn btn-sm">Детайли</a>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="quick-links">
+    <a asp-controller="Books" asp-action="Create" class="quick-link">
+        <span>➕</span>
+        <strong>Добави книга</strong>
+    </a>
+    <a asp-controller="Authors" asp-action="Create" class="quick-link">
+        <span>✍️</span>
+        <strong>Добави автор</strong>
+    </a>
+    <a asp-controller="Categories" asp-action="Create" class="quick-link">
+        <span>🏷️</span>
+        <strong>Добави категория</strong>
+    </a>
+</section>

@@ -1,0 +1,29 @@
+@model IEnumerable<Author>
+@{
+    ViewData["Title"] = "Автори";
+}
+
+<div class="page-header">
+    <h1>✍️ Автори</h1>
+    <a asp-action="Create" class="btn btn-primary">+ Добави автор</a>
+</div>
+
+<div class="card-grid">
+    @foreach (var author in Model)
+    {
+        <div class="author-card">
+            <div class="author-avatar">@author.Name[0]</div>
+            <h3>@author.Name</h3>
+            @if (!string.IsNullOrEmpty(author.Bio))
+            {
+                <p class="author-bio">@author.Bio</p>
+            }
+            <p class="author-count">@author.Books.Count книги</p>
+            <div class="card-actions">
+                <a asp-action="Details" asp-route-id="@author.AuthorId" class="btn btn-sm">Детайли</a>
+                <a asp-action="Edit" asp-route-id="@author.AuthorId" class="btn btn-sm btn-edit">Редакция</a>
+                <a asp-action="Delete" asp-route-id="@author.AuthorId" class="btn btn-sm btn-del">Изтрий</a>
+            </div>
+        </div>
+    }
+</div>

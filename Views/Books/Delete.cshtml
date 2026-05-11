@@ -1,0 +1,26 @@
+@model Book
+@{
+    ViewData["Title"] = "Изтрий книга";
+}
+
+<div class="form-card delete-card">
+    <h1>🗑️ Изтриване на книга</h1>
+    <p class="delete-msg">Сигурни ли сте, че искате да изтриете <strong>@Model.Title</strong>?</p>
+
+    <div class="detail-row">
+        <span class="detail-label">Автор</span>
+        <span class="detail-value">@Model.Author?.Name</span>
+    </div>
+    <div class="detail-row">
+        <span class="detail-label">Година</span>
+        <span class="detail-value">@Model.Year</span>
+    </div>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="BookId" />
+        <div class="form-actions">
+            <button type="submit" class="btn btn-del">Да, изтрий</button>
+            <a asp-action="Index" class="btn">Отказ</a>
+        </div>
+    </form>
+</div>

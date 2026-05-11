@@ -1,0 +1,33 @@
+@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Категории";
+}
+
+<div class="page-header">
+    <h1>🏷️ Категории</h1>
+    <a asp-action="Create" class="btn btn-primary">+ Добави категория</a>
+</div>
+
+<div class="card-grid cats">
+    @foreach (var cat in Model)
+    {
+        <div class="cat-card">
+            <h3>@cat.Name</h3>
+            <p>@cat.BookCategories.Count книги</p>
+            <div class="cat-books">
+                @foreach (var bc in cat.BookCategories.Take(3))
+                {
+                    <span class="badge">@bc.Book?.Title</span>
+                }
+                @if (cat.BookCategories.Count > 3)
+                {
+                    <span class="badge muted">+@(cat.BookCategories.Count - 3) още</span>
+                }
+            </div>
+            <div class="card-actions">
+                <a asp-action="Edit" asp-route-id="@cat.CategoryId" class="btn btn-sm btn-edit">Редакция</a>
+                <a asp-action="Delete" asp-route-id="@cat.CategoryId" class="btn btn-sm btn-del">Изтрий</a>
+            </div>
+        </div>
+    }
+</div>

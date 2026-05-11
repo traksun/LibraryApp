@@ -1,0 +1,20 @@
+@model Author
+@{
+    ViewData["Title"] = "Изтрий автор";
+}
+
+<div class="form-card delete-card">
+    <h1>🗑️ Изтриване на автор</h1>
+    <p class="delete-msg">Сигурни ли сте, че искате да изтриете <strong>@Model.Name</strong>?</p>
+    @if (Model.Books.Any())
+    {
+        <div class="alert alert-danger">Вниманието! Този автор има @Model.Books.Count книги, които ще останат без автор.</div>
+    }
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="AuthorId" />
+        <div class="form-actions">
+            <button type="submit" class="btn btn-del">Да, изтрий</button>
+            <a asp-action="Index" class="btn">Отказ</a>
+        </div>
+    </form>
+</div>

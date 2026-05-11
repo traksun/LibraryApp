@@ -1,0 +1,42 @@
+@model IEnumerable<Book>
+@{
+    ViewData["Title"] = "Книги";
+}
+
+<div class="page-header">
+    <h1>📚 Всички книги</h1>
+    <a asp-action="Create" class="btn btn-primary">+ Добави книга</a>
+</div>
+
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Заглавие</th>
+            <th>Автор</th>
+            <th>Година</th>
+            <th>Категории</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td><strong>@book.Title</strong></td>
+                <td>@book.Author?.Name</td>
+                <td>@book.Year</td>
+                <td>
+                    @foreach (var bc in book.BookCategories)
+                    {
+                        <span class="badge">@bc.Category?.Name</span>
+                    }
+                </td>
+                <td class="actions">
+                    <a asp-action="Details" asp-route-id="@book.BookId" class="btn btn-sm">Детайли</a>
+                    <a asp-action="Edit" asp-route-id="@book.BookId" class="btn btn-sm btn-edit">Редакция</a>
+                    <a asp-action="Delete" asp-route-id="@book.BookId" class="btn btn-sm btn-del">Изтрий</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

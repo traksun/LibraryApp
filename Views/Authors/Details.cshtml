@@ -1,0 +1,40 @@
+@model Author
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="detail-card">
+    <div class="detail-header">
+        <div class="author-avatar large">@Model.Name[0]</div>
+        <div>
+            <h1>@Model.Name</h1>
+            @if (!string.IsNullOrEmpty(Model.Bio))
+            {
+                <p>@Model.Bio</p>
+            }
+        </div>
+    </div>
+
+    <h2 class="section-title">Книги (@Model.Books.Count)</h2>
+    <table class="data-table">
+        <thead>
+            <tr><th>Заглавие</th><th>Година</th><th>Категории</th><th></th></tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.Books)
+            {
+                <tr>
+                    <td><strong>@book.Title</strong></td>
+                    <td>@book.Year</td>
+                    <td>@string.Join(", ", book.BookCategories.Select(bc => bc.Category?.Name))</td>
+                    <td><a asp-controller="Books" asp-action="Details" asp-route-id="@book.BookId" class="btn btn-sm">Детайли</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="detail-actions">
+        <a asp-action="Edit" asp-route-id="@Model.AuthorId" class="btn btn-edit">Редактирай</a>
+        <a asp-action="Index" class="btn">Назад</a>
+    </div>
+</div>

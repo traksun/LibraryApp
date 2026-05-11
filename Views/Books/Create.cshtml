@@ -1,0 +1,55 @@
+@model Book
+@{
+    ViewData["Title"] = "Добави книга";
+}
+
+<div class="form-card">
+    <h1>➕ Нова книга</h1>
+
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" placeholder="Въведи заглавие" />
+            <span asp-validation-for="Title" class="field-error"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Year"></label>
+            <input asp-for="Year" class="form-control" placeholder="напр. 1894" />
+            <span asp-validation-for="Year" class="field-error"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" rows="3" placeholder="Кратко описание (незадължително)"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="AuthorId"></label>
+            <select asp-for="AuthorId" asp-items="ViewBag.Authors" class="form-control">
+                <option value="">-- Избери автор --</option>
+            </select>
+            <span asp-validation-for="AuthorId" class="field-error"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Категории</label>
+            <div class="checkbox-group">
+                @foreach (var cat in ViewBag.Categories)
+                {
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="selectedCategories" value="@cat.CategoryId" />
+                        @cat.Name
+                    </label>
+                }
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Запази</button>
+            <a asp-action="Index" class="btn">Отказ</a>
+        </div>
+    </form>
+</div>

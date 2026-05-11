@@ -1,0 +1,18 @@
+@model Category
+@{
+    ViewData["Title"] = "Нова категория";
+}
+<div class="form-card">
+    <h1>🏷️ Нова категория</h1>
+    <form asp-action="Create">
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" placeholder="напр. Роман, Поезия..." />
+            <span asp-validation-for="Name" class="field-error"></span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Запази</button>
+            <a asp-action="Index" class="btn">Отказ</a>
+        </div>
+    </form>
+</div>
